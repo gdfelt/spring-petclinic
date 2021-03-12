@@ -55,7 +55,7 @@ pipeline {
 
                 sshagent(['demokey']) {
                     // some block
-                    sh """ssh -tt ubuntu@10.0.1.6 << EOF 
+                    sh """ssh -tt -o StrictHostKeyChecking=no ubuntu@10.0.1.6 << EOF 
                         cat /etc/hostname
                         datetime
                         cd petclinic/
