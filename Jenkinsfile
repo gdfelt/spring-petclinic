@@ -1,17 +1,24 @@
 pipeline {
     agent any
+    tools {
+        maven 'maven'
+        jdk 'JDK8'
+    }
     stages {
         stage('Build') {
             steps {
-	    	sh 'echo build'
-                //sh 'mvn -B -DskipTests clean package'
+                withMaven(maven: 'maven'){
+                    sh 'echo build'
+                    sh 'mvn -B -DskipTests clean package'
+                }	    	    
             }
         }
         stage('Test') {
             steps {
-	    	sh 'echo test'
-                sh 'mvn test'
-            }
+	    	    withMaven(maven: 'maven'){
+                    sh 'echo test'
+                    sh 'mvn -B test'
+                }
             post {
                 always {
                     junit 'target/surefire-reports/*.xml'
@@ -20,7 +27,7 @@ pipeline {
         }
         stage('Deliver') {
             steps {
-	    	sh 'echo deploy'
+	    	    sh 'echo deploy'
                // sh './jenkins/scripts/deliver.sh'
             }
         }
