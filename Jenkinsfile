@@ -41,7 +41,7 @@ pipeline {
 				          "files": [
 				            {
 				              "pattern": "target/spring-petclinic*.jar",
-				              "target": "PetClinicApp/spring-petclinic-${currentBuild.number}.jar"
+				              "target": "PetClinicApp/spring-petclinic-${env.BUILD_NUMBER}.jar"
 				            }
 				         ]
 				    }'''
