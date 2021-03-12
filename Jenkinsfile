@@ -46,34 +46,26 @@ pipeline {
 				         ]
 				    }'''
 				)
-
-
-
-
-                // rtUpload (
-                //     serverId: 'artifactory',
-                //     spec: '''{
-                //         "files": [
-                //             {
-                //             "pattern": "**/target/sprint-petclinic*.jar",
-                //             "target": "PetClinic/"
-                //             }
-                //         ]
-                //     }''',
-                
-                    // Optional - Associate the uploaded files with the following custom build name and build number,
-                    // as build artifacts.
-                    // If not set, the files will be associated with the default build name and build number (i.e the
-                    // the Jenkins job name and number).
-                    // buildName: 'holyFrog',
-                    // buildNumber: '42'
                 
             }
         }
         stage('Deliver') {
             steps {
-	    	    sh 'echo deploy'
-               // sh './jenkins/scripts/deliver.sh'
+	    	    echo "Beginning Deployment..."
+
+                sshagent(['demokey']) {
+                    // some block
+                    sh """ssh -tt ubuntu@10.0.1.6 << EOF 
+                        cat /etc/hostname
+                        datetime
+                        cd petclinic/
+                        curl -uadmin:AP7P4GgnmSn1KrmbYajgMT7ssBd -o spring-petclinic.jar "http://40.84.217.254:8081/artifactory/PetClinicApp/spring-petclinic-${BUILD_NUMBER}.jar"
+                        sudo systemctl restart petclinic.service
+                        exit
+                    EOF"""   
+                }
+
+               echo "Deployment Complete!"
             }
         }
     }
