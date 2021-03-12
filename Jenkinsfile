@@ -26,6 +26,15 @@ pipeline {
                 }
             }
         }
+        // 035a5281a6aff40753b719b066f2829fc5476aba
+        stage('Scanner'){
+            steps {
+                withMaven(maven: 'maven'){
+                    sh 'echo test'
+                    sh 'mvn -B test'
+                }
+            }
+        }
         stage('Publishing'){
             steps {
 

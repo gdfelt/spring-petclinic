@@ -30,6 +30,10 @@
     <jacoco.version>0.8.5</jacoco.version>
     <nohttp-checkstyle.version>0.0.4.RELEASE</nohttp-checkstyle.version>
     <spring-format.version>0.0.25</spring-format.version>
+    <!-- Sonarqube settings -->
+    <sonar.host.url>http://23.98.184.162:9000</sonar.buildString>
+    <sonar.projectKey>Petclinic</sonar.projectKey>
+    <sonar.login>035a5281a6aff40753b719b066f2829fc5476aba</sonar.login>
   </properties>
 
   <dependencies>
@@ -123,6 +127,11 @@
 
   <build>
     <plugins>
+      <plugin>
+        <groupId>org.sonarsource.scanner.maven</groupId>
+        <artifactId>sonar-maven-plugin</artifactId>
+        <version>3.7.0.1746</version>
+      </plugin>
       <plugin>
         <groupId>io.spring.javaformat</groupId>
         <artifactId>spring-javaformat-maven-plugin</artifactId>
