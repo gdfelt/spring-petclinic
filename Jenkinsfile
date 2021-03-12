@@ -59,7 +59,7 @@ pipeline {
                         cat /etc/hostname
                         datetime
                         cd petclinic/
-                        curl -uadmin:AP7P4GgnmSn1KrmbYajgMT7ssBd -o spring-petclinic.jar "http://40.84.217.254:8081/artifactory/PetClinicApp/spring-petclinic-${BUILD_NUMBER}.jar"
+                        curl -uadmin:AP7P4GgnmSn1KrmbYajgMT7ssBd -o spring-petclinic.jar --no-progress-meter "http://40.84.217.254:8081/artifactory/PetClinicApp/spring-petclinic-${BUILD_NUMBER}.jar"
                         sudo systemctl restart petclinic.service
                         exit
                     EOF"""   
