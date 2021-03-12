@@ -26,18 +26,40 @@ pipeline {
                 }
             }
         }
-        stage('Upload'){
+        stage('Publishing'){
             steps {
-                rtUpload (
-                    serverId: 'artifactory',
-                    spec: '''{
-                        "files": [
-                            {
-                            "pattern": "**/target/sprint-petclinic*.jar",
-                            "target": "PetClinic/"
-                            }
-                        ]
-                    }''',
+
+                echo 'Publishing...'
+
+				rtPublishBuildInfo (
+    				serverId: 'artifactory',
+    			)
+
+				rtUpload (
+				    serverId: 'artifactory',
+				    spec: '''{
+				          "files": [
+				            {
+				              "pattern": "target/spring-petclinic*.jar",
+				              "target": "PetClinicApp/"
+				            }
+				         ]
+				    }'''
+				)
+
+
+
+
+                // rtUpload (
+                //     serverId: 'artifactory',
+                //     spec: '''{
+                //         "files": [
+                //             {
+                //             "pattern": "**/target/sprint-petclinic*.jar",
+                //             "target": "PetClinic/"
+                //             }
+                //         ]
+                //     }''',
                 
                     // Optional - Associate the uploaded files with the following custom build name and build number,
                     // as build artifacts.
