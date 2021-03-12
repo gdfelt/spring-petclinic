@@ -33,8 +33,8 @@ pipeline {
                     spec: '''{
                         "files": [
                             {
-                            "pattern": "bazinga/*froggy*.zip",
-                            "target": "bazinga-repo/froggy-files/"
+                            "pattern": "**/target/sprint-petclinic*.jar",
+                            "target": "PetClinic/"
                             }
                         ]
                     }''',
