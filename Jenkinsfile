@@ -30,8 +30,7 @@ pipeline {
         stage('Scanner'){
             steps {
                 withMaven(maven: 'maven'){
-                    sh 'echo test'
-                    sh 'mvn -B test'
+                    sh 'mvn sonar:sonar'
                 }
             }
         }
